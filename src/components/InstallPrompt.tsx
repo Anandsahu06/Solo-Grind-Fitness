@@ -95,53 +95,53 @@ const InstallPrompt: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.9, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[101] w-[90%] max-w-md"
+                        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[101] w-[95%] sm:w-[90%] max-w-md max-h-[90vh] overflow-y-auto"
                     >
-                        <div className="glass-card p-6 border border-primary/30 relative">
+                        <div className="glass-card p-4 sm:p-6 border border-primary/30 relative">
                             {/* Close Button */}
                             <button
                                 onClick={handleDismiss}
-                                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                                className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white transition-colors z-10"
                             >
-                                <X size={20} />
+                                <X size={18} className="sm:w-5 sm:h-5" />
                             </button>
 
                             {/* Logo */}
-                            <div className="flex justify-center mb-4">
+                            <div className="flex justify-center mb-3 sm:mb-4">
                                 <img
                                     src="/sologrind.png"
                                     alt="Solo Grind"
-                                    className="h-16 w-auto object-contain"
+                                    className="h-12 sm:h-16 w-auto object-contain"
                                 />
                             </div>
 
                             {/* Content */}
-                            <div className="text-center mb-6">
-                                <h2 className="text-2xl font-heading font-bold mb-2">
+                            <div className="text-center mb-4 sm:mb-6 pr-6">
+                                <h2 className="text-lg sm:text-2xl font-heading font-bold mb-1 sm:mb-2">
                                     Install Solo Grind Fitness
                                 </h2>
-                                <p className="text-gray-400 text-sm">
+                                <p className="text-gray-400 text-xs sm:text-sm">
                                     Get the full app experience! Install now for:
                                 </p>
                             </div>
 
                             {/* Benefits */}
-                            <div className="space-y-3 mb-6">
-                                <div className="flex items-center gap-3 text-sm">
-                                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                                        <span className="text-primary">⚡</span>
+                            <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+                                <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+                                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                                        <span className="text-primary text-sm sm:text-base">⚡</span>
                                     </div>
                                     <span className="text-gray-300">Faster loading & offline access</span>
                                 </div>
-                                <div className="flex items-center gap-3 text-sm">
-                                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                                        <span className="text-primary">🔔</span>
+                                <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+                                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                                        <span className="text-primary text-sm sm:text-base">🔔</span>
                                     </div>
                                     <span className="text-gray-300">Push notifications for streaks</span>
                                 </div>
-                                <div className="flex items-center gap-3 text-sm">
-                                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                                        <span className="text-primary">📱</span>
+                                <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+                                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                                        <span className="text-primary text-sm sm:text-base">📱</span>
                                     </div>
                                     <span className="text-gray-300">Native app-like experience</span>
                                 </div>
@@ -150,16 +150,16 @@ const InstallPrompt: React.FC = () => {
                             {/* Install Button */}
                             <button
                                 onClick={handleInstallClick}
-                                className="w-full bg-gradient-to-r from-primary to-secondary text-black font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,243,255,0.3)]"
+                                className="w-full bg-gradient-to-r from-primary to-secondary text-black font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,243,255,0.3)] text-sm sm:text-base"
                             >
-                                <Download size={20} />
+                                <Download size={18} className="sm:w-5 sm:h-5" />
                                 Install App Now
                             </button>
 
                             {/* Later Button */}
                             <button
                                 onClick={handleDismiss}
-                                className="w-full mt-3 text-gray-400 hover:text-white text-sm transition-colors"
+                                className="w-full mt-2 sm:mt-3 text-gray-400 hover:text-white text-xs sm:text-sm transition-colors py-2"
                             >
                                 Maybe Later
                             </button>
