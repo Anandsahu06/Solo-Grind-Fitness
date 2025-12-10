@@ -16,6 +16,8 @@ import DonationPage from './pages/DonationPage';
 import Onboarding from './pages/Onboarding';
 import ActiveDungeon from './pages/ActiveDungeon';
 import InfoPage from './pages/InfoPage';
+import ReloadPrompt from './components/ReloadPrompt';
+import InstallPrompt from './components/InstallPrompt';
 
 function App() {
   return (
@@ -56,6 +58,8 @@ function App() {
               </ProtectedRoute>
             } />
           </Routes>
+          <ReloadPrompt />
+          <InstallPrompt />
         </Router>
       </GameProvider>
     </AuthProvider>

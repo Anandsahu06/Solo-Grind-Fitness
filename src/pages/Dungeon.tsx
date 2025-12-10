@@ -180,7 +180,7 @@ const Dungeon: React.FC = () => {
                             <p className="text-sm text-gray-400 mb-4">{dungeon.description}</p>
 
                             {/* Info Grid */}
-                            <div className="grid grid-cols-2 gap-3 mb-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
                                 <div className="flex items-center gap-2">
                                     <Clock className="text-primary" size={16} />
                                     <span className="text-sm text-gray-300">{dungeon.duration}</span>

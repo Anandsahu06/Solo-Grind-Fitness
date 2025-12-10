@@ -49,7 +49,7 @@ const DonationPage: React.FC = () => {
                             </p>
 
                             {/* Benefits */}
-                            <div className="grid grid-cols-2 gap-4 text-left mb-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left mb-8">
                                 <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                                     <div className="flex items-center gap-2 mb-1 text-primary">
                                         <Zap size={16} />

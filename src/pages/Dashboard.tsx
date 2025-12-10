@@ -227,7 +227,7 @@ const Dashboard: React.FC = () => {
                         <Award className="text-primary" size={20} />
                         Hunter Stats
                     </h3>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {[
                             { name: 'STR', value: stats.str, max: 100, color: 'from-red-500 to-orange-500', icon: Dumbbell },
                             { name: 'AGI', value: stats.agi, max: 100, color: 'from-blue-500 to-cyan-500', icon: Zap },

@@ -358,7 +358,7 @@ const Profile: React.FC = () => {
                             className="glass-card p-6 border border-white/10"
                         >
                             <h3 className="text-lg font-heading font-bold mb-4">This Week Estimates</h3>
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="text-center">
                                     <div className="text-sm text-gray-400 mb-2">Workouts</div>
                                     <div className="text-2xl font-bold text-primary">{totalWorkoutsThisWeek}</div>

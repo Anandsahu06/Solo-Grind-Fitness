@@ -278,7 +278,7 @@ const Landing: React.FC = () => {
                         </div>
 
                         {/* Stats */}
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {['Strength: 5', 'Agility: 5', 'Stamina: 5', 'Focus: 5'].map((stat, i) => (
                                 <div key={i} className="bg-white/5 rounded-lg p-3 border border-white/10">
                                     <span className="text-sm text-gray-300">{stat}</span>

@@ -5,9 +5,18 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    @apply max-w-full;
+  }
+  
+  html {
+    @apply overflow-x-hidden;
+  }
+  
   body {
     @apply bg-background text-white font-sans antialiased overflow-x-hidden;
   }
+  
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
   }
