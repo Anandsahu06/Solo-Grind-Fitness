@@ -61,6 +61,11 @@ const userSchema = new mongoose.Schema({
         default: 0,
         min: 0
     },
+    totalXp: {
+        type: Number,
+        default: 0,
+        min: 0
+    },
     xpToNextLevel: {
         type: Number,
         default: 100
@@ -155,6 +160,7 @@ userSchema.methods.generatePasswordResetToken = function () {
 // Add XP and handle leveling
 userSchema.methods.addXp = function (amount) {
     this.xp += amount;
+    this.totalXp = (this.totalXp || 0) + amount;
 
     while (this.xp >= this.xpToNextLevel) {
         this.xp -= this.xpToNextLevel;
