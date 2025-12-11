@@ -7,8 +7,7 @@ import {
     Clock,
     Trophy,
     ChevronLeft,
-    Dumbbell,
-    Timer
+    Dumbbell
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -155,7 +154,7 @@ const CustomDungeon: React.FC = () => {
                     </div>
 
                     <div className="space-y-3">
-                        {exercises.map((exercise, index) => (
+                        {exercises.map((exercise) => (
                             <div key={exercise.id} className="flex flex-col sm:flex-row gap-2">
                                 <div className="flex-1">
                                     <input

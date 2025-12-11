@@ -1,7 +1,6 @@
 // Sound utility using Web Audio API for game sounds
 class SoundManager {
     private audioContext: AudioContext | null = null;
-    private sounds: { [key: string]: AudioBuffer } = {};
 
     constructor() {
         // Initialize AudioContext on first user interaction
