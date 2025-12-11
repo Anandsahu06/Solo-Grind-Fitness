@@ -17,7 +17,7 @@ const SupportFab: React.FC = () => {
             title="Buy me a coffee"
         >
             <Coffee size={24} className="group-hover:rotate-12 transition-transform" />
-            <span className="hidden group-hover:block absolute right-full mr-3 bg-white text-black px-2 py-1 rounded text-xs font-bold whitespace-nowrap">
+            <span className="hidden group-hover:block static bottom-full left-1/2 -translate-x-1/2 md:bottom-auto md:left-auto md:translate-x-0 md:right-20  text-black px-3 py-1.5 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap shadow-lg">
                 Support Dev
             </span>
         </motion.button>

@@ -38,36 +38,37 @@ function App() {
             <Route path="/terms-of-service" element={<InfoPage title="Terms of Service" />} />
             <Route path="/cookie-policy" element={<InfoPage title="Cookie Policy" />} />
 
+
             {/* Protected Routes */}
             <Route path="/dungeon/active" element={
               <ProtectedRoute>
                 <ActiveDungeon />
               </ProtectedRoute>
-            </Route>
-          <Route path="/dungeon/custom" element={
-            <ProtectedRoute>
-              <CustomDungeon />
-            </ProtectedRoute>
-          } />
-          <Route path="/*" element={
-            <ProtectedRoute>
-              <Layout>
-                <Routes>
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/quests" element={<Quests />} />
-                  <Route path="/dungeon" element={<Dungeon />} />
-                  <Route path="/guilds" element={<Guilds />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/settings" element={<Settings />} />
-                </Routes>
-              </Layout>
-            </ProtectedRoute>
-          } />
-        </Routes>
-        <ReloadPrompt />
-        <InstallPrompt />
-      </Router>
-    </GameProvider>
+            } />
+            <Route path="/dungeon/custom" element={
+              <ProtectedRoute>
+                <CustomDungeon />
+              </ProtectedRoute>
+            } />
+            <Route path="/*" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Routes>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/quests" element={<Quests />} />
+                    <Route path="/dungeon" element={<Dungeon />} />
+                    <Route path="/guilds" element={<Guilds />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/settings" element={<Settings />} />
+                  </Routes>
+                </Layout>
+              </ProtectedRoute>
+            } />
+          </Routes>
+          <ReloadPrompt />
+          <InstallPrompt />
+        </Router>
+      </GameProvider>
     </AuthProvider >
   );
 }
