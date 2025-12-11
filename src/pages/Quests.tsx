@@ -15,6 +15,7 @@ import {
 import confetti from 'canvas-confetti';
 import { calculateUserLevel } from '../utils/levelingSystem';
 import { updateHistory } from '../utils/historySystem';
+import { soundManager } from '../utils/soundManager';
 
 interface Quest {
     id: string;
@@ -217,6 +218,8 @@ const Quests: React.FC = () => {
                 const newCompleted = !quest.completed;
                 updateUserStats(quest.xp, quest.stat, newCompleted);
                 if (newCompleted) {
+                    soundManager.resume();
+                    soundManager.playQuestComplete();
                     confetti({
                         particleCount: 50,
                         spread: 60,
@@ -239,6 +242,8 @@ const Quests: React.FC = () => {
 
                 if (newCompleted && !wasCompleted) {
                     updateUserStats(quest.xp, quest.stat, true);
+                    soundManager.resume();
+                    soundManager.playQuestComplete();
                     confetti({
                         particleCount: 50,
                         spread: 60,

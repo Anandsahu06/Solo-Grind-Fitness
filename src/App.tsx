@@ -15,6 +15,7 @@ import DonationPage from './pages/DonationPage';
 
 import Onboarding from './pages/Onboarding';
 import ActiveDungeon from './pages/ActiveDungeon';
+import CustomDungeon from './pages/CustomDungeon';
 import InfoPage from './pages/InfoPage';
 import ReloadPrompt from './components/ReloadPrompt';
 import InstallPrompt from './components/InstallPrompt';
@@ -42,27 +43,32 @@ function App() {
               <ProtectedRoute>
                 <ActiveDungeon />
               </ProtectedRoute>
-            } />
-            <Route path="/*" element={
-              <ProtectedRoute>
-                <Layout>
-                  <Routes>
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/quests" element={<Quests />} />
-                    <Route path="/dungeon" element={<Dungeon />} />
-                    <Route path="/guilds" element={<Guilds />} />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/settings" element={<Settings />} />
-                  </Routes>
-                </Layout>
-              </ProtectedRoute>
-            } />
-          </Routes>
-          <ReloadPrompt />
-          <InstallPrompt />
-        </Router>
-      </GameProvider>
-    </AuthProvider>
+            </Route>
+          <Route path="/dungeon/custom" element={
+            <ProtectedRoute>
+              <CustomDungeon />
+            </ProtectedRoute>
+          } />
+          <Route path="/*" element={
+            <ProtectedRoute>
+              <Layout>
+                <Routes>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/quests" element={<Quests />} />
+                  <Route path="/dungeon" element={<Dungeon />} />
+                  <Route path="/guilds" element={<Guilds />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/settings" element={<Settings />} />
+                </Routes>
+              </Layout>
+            </ProtectedRoute>
+          } />
+        </Routes>
+        <ReloadPrompt />
+        <InstallPrompt />
+      </Router>
+    </GameProvider>
+    </AuthProvider >
   );
 }
 

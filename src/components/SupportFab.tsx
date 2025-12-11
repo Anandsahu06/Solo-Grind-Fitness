@@ -13,7 +13,7 @@ const SupportFab: React.FC = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => navigate('/donate')}
-            className="fixed bottom-6 right-6 z-40 bg-secondary text-black p-4 rounded-full shadow-[0_0_20px_rgba(188,19,254,0.4)] hover:shadow-[0_0_30px_rgba(188,19,254,0.6)] transition-shadow group flex items-center justify-center"
+            className="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-40 bg-secondary text-black p-3 md:p-4 rounded-full shadow-[0_0_20px_rgba(188,19,254,0.4)] hover:shadow-[0_0_30px_rgba(188,19,254,0.6)] transition-shadow group flex items-center justify-center"
             title="Buy me a coffee"
         >
             <Coffee size={24} className="group-hover:rotate-12 transition-transform" />

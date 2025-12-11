@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import Footer from '../components/Footer';
 import SupportFab from '../components/SupportFab';
+import InstallButton from '../components/InstallButton';
 
 const Landing: React.FC = () => {
     const navigate = useNavigate();
@@ -87,12 +88,15 @@ const Landing: React.FC = () => {
                         <img src="/sologrind.png" alt="Solo Grind" className="h-10 w-auto object-contain" />
                         <span className="font-heading font-bold text-lg tracking-wider">SOLO GRIND</span>
                     </div>
-                    <button
-                        onClick={() => navigate('/auth')}
-                        className="text-sm text-primary hover:text-white transition-colors"
-                    >
-                        Login
-                    </button>
+                    <div className="flex items-center gap-3">
+                        <InstallButton />
+                        <button
+                            onClick={() => navigate('/auth')}
+                            className="text-sm text-primary hover:text-white transition-colors"
+                        >
+                            Login
+                        </button>
+                    </div>
                 </div>
             </nav>
 
@@ -128,7 +132,7 @@ const Landing: React.FC = () => {
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             <button
-                                onClick={() => navigate('/auth')}
+                                onClick={() => navigate('/auth?mode=signup')}
                                 className="btn-primary text-lg px-8 py-4 flex items-center gap-2 group shadow-[0_0_30px_rgba(0,243,255,0.3)] hover:shadow-[0_0_50px_rgba(0,243,255,0.5)]"
                             >
                                 Start as F-Rank
@@ -333,7 +337,7 @@ const Landing: React.FC = () => {
                         className="text-center mt-16"
                     >
                         <button
-                            onClick={() => navigate('/auth')}
+                            onClick={() => navigate('/auth?mode=signup')}
                             className="btn-primary text-xl px-12 py-5 inline-flex items-center gap-3 group shadow-[0_0_40px_rgba(0,243,255,0.3)]"
                         >
                             Begin Your Journey

@@ -15,6 +15,7 @@ import {
 import confetti from 'canvas-confetti';
 import { calculateUserLevel } from '../utils/levelingSystem';
 import { updateHistory } from '../utils/historySystem';
+import { soundManager } from '../utils/soundManager';
 
 interface DungeonState {
     id: string;
@@ -68,9 +69,23 @@ const ActiveDungeon: React.FC = () => {
         }
     }, [phase, isPaused]);
 
-    const playSound = (type: 'start' | 'next' | 'complete') => {
-        // In a real app, you'd play actual sound files
-        console.log(`Playing sound: ${type}`);
+    const playSound = (type: 'start' | 'next' | 'complete' | 'stop') => {
+        soundManager.resume(); // Resume AudioContext if suspended
+
+        switch (type) {
+            case 'start':
+                soundManager.playStart();
+                break;
+            case 'next':
+                soundManager.playTimerTick();
+                break;
+            case 'complete':
+                soundManager.playDungeonComplete();
+                break;
+            case 'stop':
+                soundManager.playStop();
+                break;
+        }
     };
 
     const updateUserStats = (xpAmount: number, statsBoosts: { stat: string; boost: number }[]) => {

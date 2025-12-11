@@ -4,6 +4,7 @@ import { Home, Dumbbell, Trophy, User, Shield, LogOut, Settings } from 'lucide-r
 import { useGame } from '../context/GameContext';
 import { useAuth } from '../context/AuthContext';
 import SupportFab from './SupportFab';
+import InstallButton from './InstallButton';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { user } = useGame();
@@ -52,50 +53,62 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     <span className="font-heading font-bold text-lg tracking-wider">SOLO GRIND</span>
                 </div>
 
-                {/* Profile Section & Dropdown */}
-                <div className="relative">
-                    <button
-                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        className="flex items-center gap-4 hover:bg-white/5 p-2 rounded-lg transition-colors"
-                    >
-                        <div className="hidden md:flex flex-col items-end text-right">
-                            <span className="text-xs text-gray-400">Rank</span>
-                            <span className="font-bold text-primary">{rank}-Rank Hunter</span>
-                        </div>
-                        <div className="w-10 h-10 rounded-full bg-gray-800 border border-primary overflow-hidden">
-                            {avatar ? (
-                                <img src={avatar} alt="Profile" className="w-full h-full object-cover" />
-                            ) : (
-                                <div className="w-full h-full bg-gradient-to-br from-primary to-secondary opacity-50"></div>
-                            )}
-                        </div>
-                    </button>
+                <div className="flex items-center gap-3">
+                    <InstallButton />
 
-                    {/* Dropdown Menu */}
-                    {isDropdownOpen && (
-                        <div className="absolute right-0 top-full mt-2 w-48 bg-gray-900 border border-white/10 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2">
-                            <div className="p-2 space-y-1">
-                                <button
-                                    onClick={() => {
-                                        navigate('/profile');
-                                        setIsDropdownOpen(false);
-                                    }}
-                                    className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10 rounded-md transition-colors"
-                                >
-                                    <Settings size={16} />
-                                    Edit Profile
-                                </button>
-                                <div className="h-px bg-white/10 my-1"></div>
-                                <button
-                                    onClick={handleLogout}
-                                    className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-md transition-colors"
-                                >
-                                    <LogOut size={16} />
-                                    Logout
-                                </button>
+                    {/* Profile Section & Dropdown */}
+                    <div className="relative">
+                        <button
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                            className="flex items-center gap-2 md:gap-4 hover:bg-white/5 p-2 rounded-lg transition-colors"
+                        >
+                            <div className="hidden md:flex flex-col items-end text-right">
+                                <span className="text-xs text-gray-400">Rank</span>
+                                <span className="font-bold text-primary">{rank}-Rank Hunter</span>
                             </div>
-                        </div>
-                    )}
+                            <div className="w-10 h-10 rounded-full bg-gray-800 border border-primary overflow-hidden">
+                                {avatar ? (
+                                    <img src={avatar} alt="Profile" className="w-full h-full object-cover" />
+                                ) : (
+                                    <div className="w-full h-full bg-gradient-to-br from-primary to-secondary opacity-50"></div>
+                                )}
+                            </div>
+                        </button>
+
+                        {/* Backdrop for mobile */}
+                        {isDropdownOpen && (
+                            <div
+                                className="fixed inset-0 z-40 md:hidden"
+                                onClick={() => setIsDropdownOpen(false)}
+                            />
+                        )}
+
+                        {/* Dropdown Menu */}
+                        {isDropdownOpen && (
+                            <div className="absolute right-0 top-full mt-2 w-48 bg-gray-900 border border-white/10 rounded-lg shadow-xl overflow-hidden z-50">
+                                <div className="p-2 space-y-1">
+                                    <button
+                                        onClick={() => {
+                                            navigate('/profile');
+                                            setIsDropdownOpen(false);
+                                        }}
+                                        className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10 rounded-md transition-colors"
+                                    >
+                                        <Settings size={16} />
+                                        Edit Profile
+                                    </button>
+                                    <div className="h-px bg-white/10 my-1"></div>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-md transition-colors"
+                                    >
+                                        <LogOut size={16} />
+                                        Logout
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </header>
 

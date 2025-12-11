@@ -23,7 +23,12 @@ const avatars = [
 const Auth: React.FC = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
-    const [mode, setMode] = useState<AuthMode>('login');
+
+    // Check URL params for mode (e.g., /auth?mode=signup)
+    const searchParams = new URLSearchParams(window.location.search);
+    const initialMode = searchParams.get('mode') === 'signup' ? 'signup' : 'login';
+
+    const [mode, setMode] = useState<AuthMode>(initialMode as AuthMode);
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 

@@ -12,6 +12,7 @@ import {
     Star,
     ChevronLeft
 } from 'lucide-react';
+import { useGame } from '../context/GameContext';
 
 interface DungeonType {
     id: string;
@@ -29,6 +30,11 @@ interface DungeonType {
 
 const Dungeon: React.FC = () => {
     const navigate = useNavigate();
+    const { user } = useGame();
+
+    // Get user level from localStorage profile
+    const profile = JSON.parse(localStorage.getItem('userProfile') || '{}');
+    const userLevel = profile?.level || user?.level || 1;
 
     const dungeons: DungeonType[] = [
         {
@@ -92,15 +98,21 @@ const Dungeon: React.FC = () => {
             stats: [
                 { stat: 'ALL', boost: 5 }
             ],
-            locked: true,
+            locked: userLevel < 20,
             icon: Star,
             color: 'from-purple-500 to-pink-600',
-            description: 'Unlock at Level 10 - Design your perfect workout'
+            description: 'Unlock at Level 20 - Design your perfect workout'
         }
     ];
 
     const handleStartDungeon = (dungeon: DungeonType) => {
         if (dungeon.locked) {
+            return;
+        }
+
+        // Navigate to custom dungeon creator if it's the custom dungeon
+        if (dungeon.id === 'custom') {
+            navigate('/dungeon/custom');
             return;
         }
 
@@ -231,7 +243,7 @@ const Dungeon: React.FC = () => {
                                     className="btn-primary w-full opacity-50 cursor-not-allowed"
                                 >
                                     <Lock size={16} className="inline mr-2" />
-                                    Locked - Reach Level 10
+                                    Locked - Reach Level 20
                                 </button>
                             ) : (
                                 <button

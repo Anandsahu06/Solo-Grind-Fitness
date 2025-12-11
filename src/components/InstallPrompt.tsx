@@ -95,9 +95,11 @@ const InstallPrompt: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.9, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[101] w-[95%] sm:w-[90%] max-w-md max-h-[90vh] overflow-y-auto"
+                        className="fixed inset-0 flex items-center justify-center p-4 z-[101] pointer-events-none"
                     >
-                        <div className="glass-card p-4 sm:p-6 border border-primary/30 relative">
+                        <div className="glass-card p-4 sm:p-6 border border-primary/30 relative w-full max-w-md max-h-[90vh] overflow-y-auto pointer-events-auto"
+                            onClick={(e) => e.stopPropagation()}
+                        >
                             {/* Close Button */}
                             <button
                                 onClick={handleDismiss}
