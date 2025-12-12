@@ -215,8 +215,40 @@ const Quests: React.FC = () => {
     const handleToggleQuest = (id: string) => {
         setQuests(prev => prev.map(quest => {
             if (quest.id === id) {
+                // For progress quests (water, steps), increment instead of toggle
+                if (quest.type === 'progress') {
+                    // Determine increment amount based on quest type
+                    let incrementAmount = 1; // Default for water (1 glass)
+                    if (quest.title.includes('Steps')) {
+                        incrementAmount = 500; // 500 steps
+                    }
+
+                    // Use the existing increment logic
+                    const currentProgress = quest.progress || 0;
+                    const newProgress = Math.max(0, Math.min(currentProgress + incrementAmount, quest.max || 0));
+                    const wasCompleted = quest.completed;
+                    const newCompleted = newProgress >= (quest.max || 0);
+
+                    // If completing for the first time
+                    if (newCompleted && !wasCompleted) {
+                        updateUserStats(quest.xp, quest.stat, true);
+                        soundManager.resume();
+                        soundManager.playQuestComplete();
+                        confetti({
+                            particleCount: 50,
+                            spread: 60,
+                            origin: { y: 0.6 },
+                            colors: ['#00f3ff', '#bc13fe', '#0aff60']
+                        });
+                    }
+
+                    return { ...quest, progress: newProgress, completed: newCompleted };
+                }
+
+                // For regular checkbox quests, toggle as before
                 const newCompleted = !quest.completed;
                 updateUserStats(quest.xp, quest.stat, newCompleted);
+
                 if (newCompleted) {
                     soundManager.resume();
                     soundManager.playQuestComplete();
@@ -236,10 +268,12 @@ const Quests: React.FC = () => {
     const handleProgressIncrement = (id: string, amount: number = 1) => {
         setQuests(prev => prev.map(quest => {
             if (quest.id === id && quest.type === 'progress' && quest.progress !== undefined && quest.max !== undefined) {
-                const newProgress = Math.min((quest.progress || 0) + amount, quest.max);
+                const currentProgress = quest.progress || 0;
+                const newProgress = Math.max(0, Math.min(currentProgress + amount, quest.max));
                 const wasCompleted = quest.completed;
                 const newCompleted = newProgress >= quest.max;
 
+                // If completing for the first time
                 if (newCompleted && !wasCompleted) {
                     updateUserStats(quest.xp, quest.stat, true);
                     soundManager.resume();
@@ -250,6 +284,11 @@ const Quests: React.FC = () => {
                         origin: { y: 0.6 },
                         colors: ['#00f3ff', '#bc13fe', '#0aff60']
                     });
+                }
+
+                // If uncompleting (progress dropped below max)
+                if (wasCompleted && !newCompleted) {
+                    updateUserStats(quest.xp, quest.stat, false);
                 }
 
                 return { ...quest, progress: newProgress, completed: newCompleted };
@@ -366,12 +405,24 @@ const Quests: React.FC = () => {
                                                                 style={{ width: `${((quest.progress || 0) / (quest.max || 1)) * 100}%` }}
                                                             />
                                                         </div>
+                                                        {/* Decrement Button */}
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                handleProgressIncrement(quest.id, -(quest.max ? Math.ceil(quest.max / 10) : 1));
+                                                            }}
+                                                            className="p-1 px-2 rounded bg-white/10 hover:bg-white/20 text-red-400 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                                                            disabled={(quest.progress || 0) === 0}
+                                                        >
+                                                            <span className="text-sm font-bold">−</span>
+                                                        </button>
+                                                        {/* Increment Button */}
                                                         <button
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
                                                                 handleProgressIncrement(quest.id, quest.max ? Math.ceil(quest.max / 10) : 1);
                                                             }}
-                                                            className="p-1 rounded bg-white/10 hover:bg-white/20 text-primary transition-colors"
+                                                            className="p-1 rounded bg-white/10 hover:bg-white/20 text-primary transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                                                             disabled={quest.completed}
                                                         >
                                                             <Target size={16} />

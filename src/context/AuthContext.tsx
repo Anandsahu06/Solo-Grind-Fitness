@@ -46,6 +46,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const checkAuth = async () => {
         const token = localStorage.getItem('authToken');
+        const storedUser = localStorage.getItem('userData');
+
+        // If we have stored user data, use it immediately while verifying
+        if (storedUser) {
+            try {
+                setUser(JSON.parse(storedUser));
+            } catch (e) {
+                console.error('Failed to parse stored user data:', e);
+            }
+        }
+
         if (!token) {
             setLoading(false);
             return;
@@ -53,10 +64,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         try {
             const response = await authAPI.getMe();
-            setUser(response.data.user);
+            const userData = response.data.user;
+            setUser(userData);
+            // Store user data for persistence
+            localStorage.setItem('userData', JSON.stringify(userData));
         } catch (error) {
             console.error('Auth check failed:', error);
+            // Only clear if the token is actually invalid
             localStorage.removeItem('authToken');
+            localStorage.removeItem('userData');
+            setUser(null);
         } finally {
             setLoading(false);
         }
@@ -64,18 +81,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const login = (token: string, userData: User) => {
         localStorage.setItem('authToken', token);
+        localStorage.setItem('userData', JSON.stringify(userData));
         setUser(userData);
     };
 
     const logout = () => {
         localStorage.removeItem('authToken');
+        localStorage.removeItem('userData');
+        localStorage.removeItem('userProfile'); // Also clear profile data
         setUser(null);
         window.location.href = '/auth';
     };
 
     const updateUser = (userData: Partial<User>) => {
         if (user) {
-            setUser({ ...user, ...userData });
+            const updatedUser = { ...user, ...userData };
+            setUser(updatedUser);
+            // Update stored user data
+            localStorage.setItem('userData', JSON.stringify(updatedUser));
         }
     };
 

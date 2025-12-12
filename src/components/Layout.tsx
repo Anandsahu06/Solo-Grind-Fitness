@@ -78,32 +78,32 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                         {/* Backdrop for mobile */}
                         {isDropdownOpen && (
                             <div
-                                className="fixed inset-0 z-40 md:hidden"
+                                className="fixed inset-0 z-40 md:hidden bg-black/20"
                                 onClick={() => setIsDropdownOpen(false)}
                             />
                         )}
 
                         {/* Dropdown Menu */}
                         {isDropdownOpen && (
-                            <div className="absolute right-0 top-full mt-2 w-48 bg-gray-900 border border-white/10 rounded-lg shadow-xl overflow-hidden z-50">
+                            <div className="absolute right-0 top-full mt-2 min-w-[200px] max-w-[90vw] md:w-48 bg-gray-900 border border-white/10 rounded-lg shadow-xl overflow-hidden z-50">
                                 <div className="p-2 space-y-1">
                                     <button
                                         onClick={() => {
                                             navigate('/profile');
                                             setIsDropdownOpen(false);
                                         }}
-                                        className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10 rounded-md transition-colors"
+                                        className="flex w-full items-center gap-3 px-4 py-3 md:px-3 md:py-2 text-base md:text-sm text-gray-300 hover:text-white hover:bg-white/10 rounded-md transition-colors active:scale-95"
                                     >
-                                        <Settings size={16} />
-                                        Edit Profile
+                                        <Settings size={20} className="md:w-4 md:h-4 flex-shrink-0" />
+                                        <span>Edit Profile</span>
                                     </button>
                                     <div className="h-px bg-white/10 my-1"></div>
                                     <button
                                         onClick={handleLogout}
-                                        className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-md transition-colors"
+                                        className="flex w-full items-center gap-3 px-4 py-3 md:px-3 md:py-2 text-base md:text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-md transition-colors active:scale-95"
                                     >
-                                        <LogOut size={16} />
-                                        Logout
+                                        <LogOut size={20} className="md:w-4 md:h-4 flex-shrink-0" />
+                                        <span>Logout</span>
                                     </button>
                                 </div>
                             </div>
