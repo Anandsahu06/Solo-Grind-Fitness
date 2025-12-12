@@ -68,12 +68,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setUser(userData);
             // Store user data for persistence
             localStorage.setItem('userData', JSON.stringify(userData));
-        } catch (error) {
+        } catch (error: any) {
             console.error('Auth check failed:', error);
-            // Only clear if the token is actually invalid
-            localStorage.removeItem('authToken');
-            localStorage.removeItem('userData');
-            setUser(null);
+            // Only clear auth data if the token is actually invalid (401 error)
+            // Don't clear for network errors or other temporary issues
+            if (error.response?.status === 401) {
+                console.log('Token is invalid, clearing auth data');
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userData');
+                setUser(null);
+            } else {
+                // For other errors (network issues, server down, etc.), keep the user logged in
+                // They can still use cached data and will retry on next navigation
+                console.log('Temporary error, keeping user logged in with cached data');
+            }
         } finally {
             setLoading(false);
         }

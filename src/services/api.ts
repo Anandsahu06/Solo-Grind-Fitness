@@ -23,8 +23,9 @@ api.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response?.status === 401) {
+            // Only remove the token, let AuthContext handle the redirect
             localStorage.removeItem('authToken');
-            window.location.href = '/auth';
+            localStorage.removeItem('userData');
         }
         return Promise.reject(error);
     }
